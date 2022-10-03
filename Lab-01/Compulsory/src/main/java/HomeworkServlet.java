@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -22,26 +25,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(urlPatterns = {"/homework"})
 public class HomeworkServlet extends HttpServlet {
     
-    public static List<String> sequencesList = new ArrayList<>();
     public static List<String> permutationsList = new ArrayList<>();
-    
-    public static void addSubsequence(String word, String sub)
-    {
-        // found, add to list 
-        if (word.length() == 0)
-        {
-            if (sub.length() != 0 && !sequencesList.contains(sub))
-            {
-                sequencesList.add(sub);
-            }
-            return;
-        }
-        
-        // take out the first character from the main string and add it to the sub
-        addSubsequence(word.substring(1), sub + word.charAt(0));
-        // just take out the first character
-        addSubsequence(word.substring(1), sub);
-    }
+    public static List<String> wordsList = new ArrayList<>();
     
     public static List<String> getSubStrings(String word, int permitedSize)
     {
@@ -83,6 +68,21 @@ public class HomeworkServlet extends HttpServlet {
             addPermutation(tmp, sub + character);
         }
     }
+    
+    public static List<String> readFile(String filename) throws FileNotFoundException, IOException
+    {
+        List<String> result;
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(filename))) {
+            result = new ArrayList<>();
+            String line = bufferedReader.readLine();
+            while (line != null)
+            {
+                result.add(line.toLowerCase());
+                line = bufferedReader.readLine();
+            }
+        }
+        return result;
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -98,8 +98,6 @@ public class HomeworkServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try ( PrintWriter out = response.getWriter()) {
             
-            // clear previous sequence results
-            sequencesList.clear();
             permutationsList.clear();
             
             // Take a request parameter 
@@ -108,6 +106,19 @@ public class HomeworkServlet extends HttpServlet {
             
             String requestSizeName = "size";
             String requestSizeValue = request.getParameter(requestSizeName);
+            
+            String requestAccessName = "access";
+            String requestAccessValue = request.getParameter(requestAccessName);
+            
+            try
+            {
+                // it just won't find it otherwise
+                wordsList = readFile("C:\\Users\\Home pc\\Documents\\GitHub\\Java-Technologies\\Lab-01\\Compulsory\\src\\main\\resources\\word_file.txt");
+            }
+            catch (IOException e)
+            {
+                System.out.println("File was not found!");
+            }
             
             /* TODO output your page here. You may use following sample code. */
             out.println("<!DOCTYPE html>");
@@ -153,8 +164,15 @@ public class HomeworkServlet extends HttpServlet {
                     {
                         if (Integer.parseInt(requestSizeValue) == 0)
                         {
-                            // get the sequences
-                            addSubsequence(requestParamValue, "");
+                            List<String> subStrings = new ArrayList<>();
+                            for (int i = 1; i <= requestParamValue.length(); i++)
+                            {
+                                subStrings.addAll(getSubStrings(requestParamValue, i));
+                            }
+                            for (String sub : subStrings)
+                            {
+                                addPermutation(sub, "");
+                            }
                         }
                         else
                         {
@@ -178,28 +196,28 @@ public class HomeworkServlet extends HttpServlet {
             };
             
             // build the ordered list if list is not empty
-            if (Integer.parseInt(requestSizeValue) == 0)
+            if (!permutationsList.isEmpty())
             {
-                if (!sequencesList.isEmpty())
+                Collections.sort(permutationsList, byLengthAndThenAlphabetically); 
+                if (requestAccessValue.equals("yes") && Integer.parseInt(requestSizeValue) == 0)
                 {
-                    Collections.sort(sequencesList, byLengthAndThenAlphabetically);
                     out.println("<ol>");
-                    for (String sequence : sequencesList)
+                    for (String permutation : permutationsList)
                     {
-                        out.println("<li>" + sequence + "</li>");
+                        for (String s : wordsList)
+                        {
+                            if (s.equals(permutation))
+                            {
+                                System.out.println(s + " " + permutation);
+                                out.println("<li>" + permutation + "</li>");
+                                break;
+                            }
+                        }
                     }
                     out.println("</ol>");
                 }
                 else
                 {
-                    out.println("<h1> Problem requirements were not met! (seq) </h1>");
-                }
-            }
-            else
-            {
-                if (!permutationsList.isEmpty())
-                {
-                    Collections.sort(permutationsList, byLengthAndThenAlphabetically);
                     out.println("<ol>");
                     for (String permutation : permutationsList)
                     {
@@ -207,12 +225,11 @@ public class HomeworkServlet extends HttpServlet {
                     }
                     out.println("</ol>");
                 }
-                else
-                {
-                    out.println("<h1> Problem requirements were not met! (per) </h1>");
-                }
             }
-            
+            else
+            {
+                out.println("<h1> Problem requirements were not met! (per) </h1>");
+            }
             
             out.println("</body>");
             out.println("</html>");
