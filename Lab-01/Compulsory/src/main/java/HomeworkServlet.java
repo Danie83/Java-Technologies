@@ -23,35 +23,65 @@ import javax.servlet.http.HttpServletResponse;
 public class HomeworkServlet extends HttpServlet {
     
     public static List<String> sequencesList = new ArrayList<>();
+    public static List<String> permutationsList = new ArrayList<>();
     
-    public static void addSubsequence(String word, String sub, int safeSequenceValue)
+    public static void addSubsequence(String word, String sub)
     {
         // found, add to list 
         if (word.length() == 0)
         {
-            // if it's de default value, add any sequence into the list
-            if (safeSequenceValue == 0)
+            if (sub.length() != 0 && !sequencesList.contains(sub))
             {
-                if (sub.length() != 0)
-                {
-                    sequencesList.add(sub);
-                }
-            }
-            else
-            {
-                // otherwise add only the sequences that have the same length as the safeSequenceValue (size)
-                if (sub.length() == safeSequenceValue)
-                {
-                    sequencesList.add(sub);
-                }
+                sequencesList.add(sub);
             }
             return;
         }
         
         // take out the first character from the main string and add it to the sub
-        addSubsequence(word.substring(1), sub + word.charAt(0), safeSequenceValue);
+        addSubsequence(word.substring(1), sub + word.charAt(0));
         // just take out the first character
-        addSubsequence(word.substring(1), sub, safeSequenceValue);
+        addSubsequence(word.substring(1), sub);
+    }
+    
+    public static List<String> getSubStrings(String word, int permitedSize)
+    {
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < word.length(); i++)
+        {
+            for (int j = i + 1; j <= word.length(); j++)
+            {
+                String tmp = word.substring(i, j);
+                if (tmp.length() == permitedSize)
+                {
+                    result.add(tmp);
+                }
+            }
+        }
+        return result;
+    }
+    
+    public static void addPermutation(String word, String sub)
+    {
+        if (word.length() == 0)
+        {
+            if (sub.length() != 0 && !permutationsList.contains(sub))
+            {
+                permutationsList.add(sub);
+            }
+            return;
+        }
+        
+        for (int i = 0; i < word.length(); i++)
+        {
+            // take a character from the ith position
+            char character = word.charAt(i);
+            
+            // take out take character from the string
+            String tmp = word.substring(0, i) + word.substring(i + 1);
+            
+            // recursive call
+            addPermutation(tmp, sub + character);
+        }
     }
 
     /**
@@ -70,6 +100,7 @@ public class HomeworkServlet extends HttpServlet {
             
             // clear previous sequence results
             sequencesList.clear();
+            permutationsList.clear();
             
             // Take a request parameter 
             String requestParamName = "parameter";
@@ -120,10 +151,19 @@ public class HomeworkServlet extends HttpServlet {
                     }
                     else
                     {
-                        // get the sequences
-                        addSubsequence(requestParamValue,
-                                        "",
-                                        Integer.parseInt(requestSizeValue));
+                        if (Integer.parseInt(requestSizeValue) == 0)
+                        {
+                            // get the sequences
+                            addSubsequence(requestParamValue, "");
+                        }
+                        else
+                        {
+                            List<String> subStrings = getSubStrings(requestParamValue, Integer.parseInt(requestSizeValue));
+                            for (String sub : subStrings)
+                            {
+                                addPermutation(sub, "");
+                            }
+                        }
                     }
                 }
             }
@@ -138,20 +178,41 @@ public class HomeworkServlet extends HttpServlet {
             };
             
             // build the ordered list if list is not empty
-            if (!sequencesList.isEmpty())
+            if (Integer.parseInt(requestSizeValue) == 0)
             {
-                Collections.sort(sequencesList, byLengthAndThenAlphabetically);
-                out.println("<ol>");
-                for (String sequence : sequencesList)
+                if (!sequencesList.isEmpty())
                 {
-                    out.println("<li>" + sequence + "</li>");
+                    Collections.sort(sequencesList, byLengthAndThenAlphabetically);
+                    out.println("<ol>");
+                    for (String sequence : sequencesList)
+                    {
+                        out.println("<li>" + sequence + "</li>");
+                    }
+                    out.println("</ol>");
                 }
-                out.println("</ol>");
+                else
+                {
+                    out.println("<h1> Problem requirements were not met! (seq) </h1>");
+                }
             }
             else
             {
-                out.println("<h1> Problem requirements were not met! </h1>");
+                if (!permutationsList.isEmpty())
+                {
+                    Collections.sort(permutationsList, byLengthAndThenAlphabetically);
+                    out.println("<ol>");
+                    for (String permutation : permutationsList)
+                    {
+                        out.println("<li>" + permutation + "</li>");
+                    }
+                    out.println("</ol>");
+                }
+                else
+                {
+                    out.println("<h1> Problem requirements were not met! (per) </h1>");
+                }
             }
+            
             
             out.println("</body>");
             out.println("</html>");
