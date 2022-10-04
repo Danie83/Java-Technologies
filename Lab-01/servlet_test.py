@@ -1,6 +1,7 @@
 import requests
 import random
 import string
+import threading
 
 
 def get_random_string(length):
@@ -14,7 +15,10 @@ def servlet_test(string, size, access):
 if "__main__" == __name__:
     for i in range(1, 100):
         if i % 5 == 0:
-            servlet_test(get_random_string(random.randint(5, 10)), "0", "yes")
+            thread = threading.Thread(target=servlet_test, args=(get_random_string(random.randint(2, 6)), "0", "yes",))
+            thread.start()
         else:
-            stringValue = get_random_string(random.randint(5, 10))
-            servlet_test(stringValue, str(random.randint(1, len(stringValue))), "no")
+            stringValue = get_random_string(random.randint(2, 6))
+            thread = threading.Thread(target=servlet_test, args=(stringValue, str(random.randint(1, len(stringValue))), "no",))
+            thread.start()
+    thread.join()
