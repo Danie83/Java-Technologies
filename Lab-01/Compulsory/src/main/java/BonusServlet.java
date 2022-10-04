@@ -31,6 +31,17 @@ public class BonusServlet extends HttpServlet {
     public static final Logger logger = Logger.getLogger("BonusServlet");  
     public static List<String> permutationsList = new ArrayList<>();
     public static List<String> wordsList = new ArrayList<>();
+    public static boolean switcher = false;
+    
+    BonusServlet()
+    {
+        if (switcher == false)
+        {
+            setLogger();
+            switcher = true;
+        }
+        
+    }
     
     public static List<String> getSubStrings(String word, int permitedSize)
     {
@@ -87,6 +98,24 @@ public class BonusServlet extends HttpServlet {
         }
         return result;
     }
+    
+    public static void setLogger()
+    {
+        FileHandler fileHandler;
+        try
+        {
+            fileHandler = new FileHandler("C:\\Users\\Home pc\\Documents\\GitHub\\Java-Technologies\\Lab-01\\Compulsory\\src\\main\\resources\\server.log");
+            logger.addHandler(fileHandler);
+            SimpleFormatter formatter = new SimpleFormatter();
+            fileHandler.setFormatter(formatter);
+        }
+        catch (IOException | SecurityException e)
+        {
+            System.out.println("filehandler");
+        }
+        
+        logger.info("LOGGING BonusServlet");
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -101,20 +130,7 @@ public class BonusServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/plain");
         try ( PrintWriter out = response.getWriter()) {
-            FileHandler fileHandler;
-            try
-            {
-                fileHandler = new FileHandler("C:\\Users\\Home pc\\Documents\\GitHub\\Java-Technologies\\Lab-01\\Compulsory\\src\\main\\resources\\server.log");
-                logger.addHandler(fileHandler);
-                SimpleFormatter formatter = new SimpleFormatter();
-                fileHandler.setFormatter(formatter);
-            }
-            catch (IOException | SecurityException e)
-            {
-                System.out.println("filehandler");
-            }
             
-            logger.info("LOGGING BonusServlet");
             StringBuilder loggerBuilder = new StringBuilder();
             
             permutationsList.clear();
