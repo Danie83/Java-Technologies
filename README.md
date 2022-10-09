@@ -16,3 +16,10 @@ An upgrade of Compulsory. Being given a word as a parameter, it will return perm
 ### Bonus
 Bonus is similar to Homework, but an external script is used to send requests and a logger was added to keep track of useful information from each request.
 Bonus exercise can be tested by using `python3 servlet_test.py`.
+
+## Lab 2 - Web Components
+I use a Payara Server for this laboratory.
+### Compulsory
+The exercise consists of a form that can be completed with a word and a size and then submitted. Upon submitting the form, the user is redirected to another page where a table is displayed. The table will have as column headers each letter of the word and in the first row it will show each letter multiplied by the size e.g. Column header is letter 'a' and size is 3, the first row will display 'aaa'.
+
+`http://localhost:8080/JTLab2/controller`
