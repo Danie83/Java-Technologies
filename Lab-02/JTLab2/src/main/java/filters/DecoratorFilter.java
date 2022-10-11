@@ -8,7 +8,6 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Date;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -16,15 +15,14 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
-import javax.servlet.http.HttpServletRequest;
-import utils.BusinessLogic;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
  * @author Home pc
  */
-@WebFilter(filterName = "LogFilter", urlPatterns = {"/*"})
-public class LogFilter implements Filter {
+@WebFilter(filterName = "DecoratorFilter", urlPatterns = {"/*"})
+public class DecoratorFilter implements Filter {
     
     private static final boolean debug = true;
 
@@ -33,13 +31,13 @@ public class LogFilter implements Filter {
     // configured. 
     private FilterConfig filterConfig = null;
     
-    public LogFilter() {
+    public DecoratorFilter() {
     }    
     
     private void doBeforeProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("LogFilter:DoBeforeProcessing");
+            log("DecoratorFilter:DoBeforeProcessing");
         }
 
         // Write code here to process the request and/or response before
@@ -67,7 +65,7 @@ public class LogFilter implements Filter {
     private void doAfterProcessing(ServletRequest request, ServletResponse response)
             throws IOException, ServletException {
         if (debug) {
-            log("LogFilter:DoAfterProcessing");
+            log("DecoratorFilter:DoAfterProcessing");
         }
 
         // Write code here to process the request and/or response after
@@ -98,30 +96,25 @@ public class LogFilter implements Filter {
      * @exception IOException if an input/output error occurs
      * @exception ServletException if a servlet error occurs
      */
-    @Override
     public void doFilter(ServletRequest request, ServletResponse response,
             FilterChain chain)
             throws IOException, ServletException {
         
         if (debug) {
-            log("LogFilter:doFilter()");
+            log("DecoratorFilter:doFilter()");
         }
         
         doBeforeProcessing(request, response);
         
         Throwable problem = null;
         try {
-            System.out.println("Invoked logging filter!");
-        
-            HttpServletRequest req = (HttpServletRequest) request;
-            String method = req.getMethod();
-            String ipAddress = req.getRemoteAddr();
-
-            BusinessLogic bl = BusinessLogic.getInstance();
-            bl.bw.write("Method: " + method + " IP: " + ipAddress + " Time: " + new Date().toString());
-            bl.bw.newLine();
-            bl.bw.flush();
-            chain.doFilter(request, response);
+            System.out.println("Invoking decorator filter!");
+            PrintWriter pw = response.getWriter();
+            ResponseWrapper responseWrapper = new ResponseWrapper((HttpServletResponse) response);
+            chain.doFilter(request, responseWrapper);
+            
+            pw.write("This is a prelude!</br></br>" + responseWrapper.toString() + "</br>This is a coda!</br>");
+            
         } catch (Throwable t) {
             // If an exception is thrown somewhere down the filter chain,
             // we still want to execute our after processing, and then
@@ -174,7 +167,7 @@ public class LogFilter implements Filter {
         this.filterConfig = filterConfig;
         if (filterConfig != null) {
             if (debug) {                
-                log("LogFilter:Initializing filter");
+                log("DecoratorFilter:Initializing filter");
             }
         }
     }
@@ -185,9 +178,9 @@ public class LogFilter implements Filter {
     @Override
     public String toString() {
         if (filterConfig == null) {
-            return ("LogFilter()");
+            return ("DecoratorFilter()");
         }
-        StringBuffer sb = new StringBuffer("LogFilter(");
+        StringBuffer sb = new StringBuffer("DecoratorFilter(");
         sb.append(filterConfig);
         sb.append(")");
         return (sb.toString());
