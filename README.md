@@ -1,5 +1,6 @@
 # Java-Technologies
-Reminder: Do not install any server in a filepath that contains space.
+Reminder - Lab 1: Do not install any server in a filepath that contains space.
+Reminder - Lab 2: If the project previously worked, and then it stopped working... Simply create a new project, deploy on the same server as the previous project, close the server. Return to the original project and deploy it again! It's scary when it happens for the first time and don't know what to do :')
 
 ## Lab 1 - Java Servlet Technology
 I use a Payara Server for this laboratory.
@@ -23,3 +24,8 @@ I use a Payara Server for this laboratory.
 The exercise consists of a form that can be completed with a word and a size and then submitted. Upon submitting the form, the user is redirected to another page where a table is displayed. The table will have as column headers each letter of the word and in the first row it will show each letter multiplied by the size e.g. Column header is letter 'a' and size is 3, the first row will display 'aaa'.
 
 `http://localhost:8080/JTLab2/controller`
+
+### Homework
+This exercise was done on top of Compulsory and most changes are done in the code. The changes include a model for the elements sent through the form, a Singleton class for business-logic that is used to by the logging web filter to write information into server.log and a decorator web filter that adds a prelude and a coda to the response (The web-flow was already implemented in the previous exercise).
+
+`http://localhost:8080/JTLab2/controller`, complete the form and submit. The decorator is present in both form and result pages, the server.log can be accessed from the project files.
