@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import models.FormModel;
 
 /**
  *
@@ -58,8 +59,9 @@ public class Controller extends HttpServlet {
             throws ServletException, IOException {
         String letters = request.getParameter("letters");
         String size = request.getParameter("size");
-        String nextPage = (letters != null && !letters.isEmpty() 
-                && size != null && !size.isEmpty() 
+        FormModel form = new FormModel(letters, size);
+        String nextPage = (form.getLetters() != null && !form.getLetters().isEmpty() 
+                && form.getSize() != null && !form.getSize().isEmpty() 
                 ? "/result.jsp" : "/input.jsp");
         getServletContext().getRequestDispatcher(nextPage)
                 .forward(request, response);
