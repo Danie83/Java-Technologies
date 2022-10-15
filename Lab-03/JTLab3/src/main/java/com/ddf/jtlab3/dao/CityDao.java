@@ -30,7 +30,7 @@ public class CityDao implements Dao<City> {
     public List<City> getAll() 
     {
         List<City> allCities = new ArrayList<>();
-        String sql = "SELECT * FROM Cities";
+        String sql = "SELECT * FROM public.cities";
 
         try (Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(sql)) 
@@ -39,7 +39,7 @@ public class CityDao implements Dao<City> {
             if (resultSet.next()) 
             {
                 int cityId = resultSet.getInt("id");
-                String cityName = resultSet.getString("name");
+                String cityName = resultSet.getString("city");
 
                 allCities.add(new City(cityId, cityName));
             }

@@ -11,12 +11,12 @@ package com.ddf.jtlab3.models;
 public class Team 
 {
     private int id;
-    private String name;
+    private String team;
     
-    public Team(int id, String name)
+    public Team(int id, String team)
     {
         this.id = id;
-        this.name = name;
+        this.team = team;
     }
     
     /**
@@ -36,14 +36,14 @@ public class Team
     /**
      * @return the name
      */
-    public String getName() {
-        return name;
+    public String getTeam() {
+        return team;
     }
 
     /**
      * @param name the name to set
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setTeam(String team) {
+        this.team = team;
     }
 }

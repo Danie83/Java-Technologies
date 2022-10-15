@@ -10,12 +10,12 @@ package com.ddf.jtlab3.models;
  */
 public class City {
     private int id;
-    private String name;
+    private String city;
     
-    public City(int id, String name)
+    public City(int id, String city)
     {
         this.id = id;
-        this.name = name;
+        this.city = city;
     }
 
     /**
@@ -35,14 +35,14 @@ public class City {
     /**
      * @return the name
      */
-    public String getName() {
-        return name;
+    public String getCity() {
+        return city;
     }
 
     /**
      * @param name the name to set
      */
-    public void setName(String name) {
-        this.name = name;
+    public void setCity(String city) {
+        this.city = city;
     }
 }

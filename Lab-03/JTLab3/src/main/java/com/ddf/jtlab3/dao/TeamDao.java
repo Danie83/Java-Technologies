@@ -30,17 +30,15 @@ public class TeamDao implements Dao<Team> {
     public List<Team> getAll() 
     {
         List<Team> allTeams = new ArrayList<>();
-        String sql = "SELECT * FROM Teams";
+        String sql = "SELECT * FROM teams";
 
         try (Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(sql)) 
         {
-
-            if (resultSet.next()) 
+            while (resultSet.next()) 
             {
                 int teamId = resultSet.getInt("id");
-                String teamName = resultSet.getString("name");
-                System.out.println(teamName);
+                String teamName = resultSet.getString("team");
                 allTeams.add(new Team(teamId, teamName));
             }
         } 
@@ -48,7 +46,6 @@ public class TeamDao implements Dao<Team> {
         {
             System.out.println(e);
         }
-
         return allTeams;
     }
 }

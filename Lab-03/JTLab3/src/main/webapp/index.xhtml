@@ -12,23 +12,12 @@
             border: 1px solid;
         }
     </style>
+    
     <h:body>
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Team</th>
-            </tr>
-            <tr>
-                <%
-                    List<Team> teams = (List<Team>) request.getAttribute("teams");
-                    for (Team team : teams)
-                    {
-                        out.println("<th>"+team.getId().toString()+"</th>");
-                        out.println("<th>"+team.getName().toString()+"</th>");
-                    }
-                %>
-            </tr>
-        </table>
+        <h:dataTable value="#{teamsBean.getAteams()}" var="team">
+            <h:column>#{team.getId()}</h:column>
+            <h:column>#{team.getTeam()}</h:column>
+        </h:dataTable>
     </h:body>
 </html>
 

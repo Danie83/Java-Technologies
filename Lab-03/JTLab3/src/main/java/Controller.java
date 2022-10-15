@@ -72,7 +72,10 @@ public class Controller extends HttpServlet {
             System.out.println(e);
         }
         List<Team> teams = td.getAll();
-        System.out.println(teams.size());
+        for (Team team : teams)
+        {
+            System.out.println(team.getTeam());
+        }
         request.setAttribute("teams", teams);
         getServletContext().getRequestDispatcher("/index.jsp")
                 .forward(request, response);
