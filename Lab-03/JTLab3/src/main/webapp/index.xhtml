@@ -3,8 +3,6 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:p="http://primefaces.org/ui">
-    <%@ page import="java.util.List" %>
-    <%@ page import="com.ddf.jtlab3.models.Team" %>
     <h:head>
         <title>Facelet Title</title>
     </h:head>
@@ -14,16 +12,16 @@
         }
     </style>
     
-    <h:body>
+    <h:body> 
         <h:form>
             <div class="card">
-                <p:dataTable var="team1" value="#{teamsBean.ateams}">
+                <p:dataTable var="team" value="#{dtTeamView.teams}">
                     <p:column headerText="ID">
-                        <h:outputText value="#{team1.id}" />
+                        <h:outputText value="#{team.id}" />
                     </p:column>
 
-                    <p:column headerText="Team1">
-                        <h:outputText value="#{team1.team}" />
+                    <p:column headerText="Team">
+                        <h:outputText value="#{team.team}" />
                     </p:column>
                 </p:dataTable>
             </div>
