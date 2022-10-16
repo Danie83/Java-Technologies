@@ -18,7 +18,7 @@ import java.util.List;
  * @author Home pc
  */
 public class TeamDao implements Dao<Team> {
-    private List<Team> teams = new ArrayList<>();
+    private List<Team> teams;
     private final Connection connection;
     
     public TeamDao() throws SQLException
@@ -47,5 +47,19 @@ public class TeamDao implements Dao<Team> {
             System.out.println(e);
         }
         return allTeams;
+    }
+
+    /**
+     * @return the teams
+     */
+    public List<Team> getTeams() {
+        return getAll();
+    }
+
+    /**
+     * @param teams the teams to set
+     */
+    public void setTeams(List<Team> teams) {
+        this.teams = teams;
     }
 }
