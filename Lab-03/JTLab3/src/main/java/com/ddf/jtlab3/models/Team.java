@@ -4,6 +4,8 @@
  */
 package com.ddf.jtlab3.models;
 
+import java.sql.Date;
+
 /**
  *
  * @author Home pc
@@ -12,11 +14,13 @@ public class Team
 {
     private int id;
     private String team;
+    private Date date;
     
-    public Team(int id, String team)
+    public Team(int id, String team, Date date)
     {
         this.id = id;
         this.team = team;
+        this.date = date;
     }
     
     /**
@@ -45,5 +49,19 @@ public class Team
      */
     public void setTeam(String team) {
         this.team = team;
+    }
+
+    /**
+     * @return the date
+     */
+    public Date getDate() {
+        return date;
+    }
+
+    /**
+     * @param date the date to set
+     */
+    public void setDate(Date date) {
+        this.date = date;
     }
 }

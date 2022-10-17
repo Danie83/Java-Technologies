@@ -7,6 +7,7 @@ package com.ddf.jtlab3.dao;
 import com.ddf.jtlab3.jdbc.JDBCConnection;
 import com.ddf.jtlab3.models.Team;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -39,7 +40,8 @@ public class TeamDao implements Dao<Team> {
             {
                 int teamId = resultSet.getInt("id");
                 String teamName = resultSet.getString("team");
-                allTeams.add(new Team(teamId, teamName));
+                Date teamDate = resultSet.getDate("date");
+                allTeams.add(new Team(teamId, teamName, teamDate));
             }
         } 
         catch (SQLException e) 
