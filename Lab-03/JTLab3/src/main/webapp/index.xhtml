@@ -2,34 +2,52 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Facelet Title</title>
     </h:head>
-    <style>
-        table, th, td {
-            border: 1px solid;
-        }
-    </style>
-    
     <h:body> 
-        <h:form>
-            <div class="card">
-                <p:dataTable var="team" value="#{dtTeamView.teams}">
-                    <p:column headerText="ID">
-                        <h:outputText value="#{team.id}" />
-                    </p:column>
-                    
-                    <p:column headerText="Date">
-                        <h:outputText value="#{team.date}" />
-                    </p:column>
+        <h:form id="teams">
+            <p:dataTable id="teamsList" var="team" value="#{dtTeamView.teams}">
+                <p:column headerText="ID">
+                    <h:outputText value="#{team.id}" />
+                </p:column>
 
-                    <p:column headerText="Team">
-                        <h:outputText value="#{team.team}" />
-                    </p:column>
-                </p:dataTable>
-            </div>
+                <p:column headerText="Date">
+                    <h:outputText value="#{team.date}" />
+                </p:column>
+
+                <p:column headerText="Team">
+                    <h:outputText value="#{team.city}" />
+                </p:column>
+            </p:dataTable>
         </h:form>
+        <div class="card">
+            <p:commandButton value="AddShow" type="button" icon="pi pi-external-link" onclick="PF('dlg2').show()"/>
+        </div>
+        <p:dialog header="Header" widgetVar="dlg2" minHeight="40" width="350" showEffect="fade" modal="true">
+            <h:form id="add">
+                <h:panelGrid columns="3" cellpadding="5" style="margin: 0 auto;">
+                    <p:outputLabel for="id" value="ID" />
+                    <p:inputText id="id" value="#{dtTeamView.selectedTeam.id}" />
+                    <p:message for="id" />
+
+                    <p:outputLabel for="date" value="Founding Date" />
+                    <p:calendar id="date" value="#{dtTeamView.selectedTeam.date}" pattern="dd.MM.yyyy" mask="true">
+                        <f:convertDateTime type="date" pattern="dd.MM.yyyy" />
+                    </p:calendar>
+                    <p:message for="date" />
+
+                    <p:outputLabel for="city" value="City" />
+                    <p:inputText id="city" value="#{dtTeamView.selectedTeam.city}">
+                    </p:inputText>
+                    <p:message for="city" />
+                    
+                    <p:commandButton update="@form :teams:teamsList" value="Add" type="button" action="#{dtTeamView.add}"/>
+                </h:panelGrid>
+            </h:form>
+        </p:dialog>
     </h:body>
 </html>
 

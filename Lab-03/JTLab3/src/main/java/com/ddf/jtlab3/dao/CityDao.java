@@ -41,7 +41,7 @@ public class CityDao implements Dao<City> {
                 int cityId = resultSet.getInt("id");
                 String cityName = resultSet.getString("city");
 
-                allCities.add(new City(cityId, cityName));
+                allCities.add(new City(cityName));
             }
         } 
         catch (SQLException e) 

@@ -22,6 +22,7 @@ import services.TeamService;
 public class TeamView implements Serializable {
 
     private List<Team> teams;
+    private Team selectedTeam;
 
     @Inject
     private TeamService service;
@@ -37,5 +38,34 @@ public class TeamView implements Serializable {
 
     public void setService(TeamService service) {
         this.service = service;
+    }
+    
+    public void delete(Team team)
+    {
+        this.teams.remove(team);
+    }
+    
+    public void add()
+    {
+        this.setSelectedTeam(new Team());
+    }
+    
+    public void update()
+    {
+        
+    }
+
+    /**
+     * @return the selectedTeam
+     */
+    public Team getSelectedTeam() {
+        return selectedTeam;
+    }
+
+    /**
+     * @param selectedTeam the selectedTeam to set
+     */
+    public void setSelectedTeam(Team selectedTeam) {
+        this.selectedTeam = selectedTeam;
     }
 }

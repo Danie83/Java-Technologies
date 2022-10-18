@@ -39,9 +39,9 @@ public class TeamDao implements Dao<Team> {
             while (resultSet.next()) 
             {
                 int teamId = resultSet.getInt("id");
-                String teamName = resultSet.getString("team");
+                String teamCityName = resultSet.getString("city");
                 Date teamDate = resultSet.getDate("date");
-                allTeams.add(new Team(teamId, teamName, teamDate));
+                allTeams.add(new Team(teamId, teamCityName, teamDate));
             }
         } 
         catch (SQLException e) 

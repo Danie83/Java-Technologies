@@ -13,14 +13,18 @@ import java.sql.Date;
 public class Team 
 {
     private int id;
-    private String team;
     private Date date;
+    private String city;
     
-    public Team(int id, String team, Date date)
+    public Team(int id, String city, Date date)
     {
         this.id = id;
-        this.team = team;
+        this.city = city;
         this.date = date;
+    }
+
+    public Team() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
     /**
@@ -40,15 +44,14 @@ public class Team
     /**
      * @return the name
      */
-    public String getTeam() {
-        return team;
+    public String getCity() {
+        return city;
     }
 
     /**
-     * @param name the name to set
      */
-    public void setTeam(String team) {
-        this.team = team;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     /**

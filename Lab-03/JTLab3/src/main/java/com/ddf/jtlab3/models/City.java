@@ -9,27 +9,11 @@ package com.ddf.jtlab3.models;
  * @author Home pc
  */
 public class City {
-    private int id;
     private String city;
     
-    public City(int id, String city)
+    public City(String city)
     {
-        this.id = id;
         this.city = city;
-    }
-
-    /**
-     * @return the id
-     */
-    public int getId() {
-        return id;
-    }
-
-    /**
-     * @param id the id to set
-     */
-    public void setId(int id) {
-        this.id = id;
     }
 
     /**
@@ -40,7 +24,7 @@ public class City {
     }
 
     /**
-     * @param name the name to set
+     * @param city the name to set
      */
     public void setCity(String city) {
         this.city = city;
