@@ -29,3 +29,10 @@ The exercise consists of a form that can be completed with a word and a size and
 This exercise was done on top of Compulsory and most changes are done in the code. The changes include a model for the elements sent through the form, a Singleton class for business-logic that is used to by the logging web filter to write information into server.log and a decorator web filter that adds a prelude and a coda to the response (The web-flow was already implemented in the previous exercise).
 
 `http://localhost:8080/JTLab2/controller`, complete the form and submit. The decorator is present in both form and result pages, the server.log can be accessed from the project files.
+
+## Lab 3 - JavaServer Faces
+I use a Payara Server for this laboratory.
+### Compulsory
+I created a PostgreSQL database in order to store data about Teams and Cities in a JSF Project using Maven. The main `index.xhtml` page that is rendered initially uses primefaces in order to display the id, found date and city using a basic datatable.
+
+`http://localhost:8080/JTLab3`
