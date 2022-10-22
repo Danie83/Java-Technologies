@@ -11,7 +11,7 @@ I created a PostgreSQL database in order to store data about Teams and Cities in
 `http://localhost:8080/JTLab3`
 
 ### Homework
-Similar project to Compulsory, but on top of the datatable created above, I introduced CRUD (create, read, update, delete) using separate pages (except delete).
+Similar project to Compulsory, but on top of the datatable created above, I introduced CRUD (create, read, update, delete) using separate pages (except delete, which didn't require a new page in order to perform the action).
 
 `http://localhost:8080/JTLab3-Homework`
 
