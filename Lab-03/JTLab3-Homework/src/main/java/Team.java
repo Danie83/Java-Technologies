@@ -74,8 +74,6 @@ public class Team implements Serializable{
         this.city = city;
     }
     
-    // Used to establish connection  
-
     public Connection getConnection() 
     {
         try 
@@ -89,7 +87,6 @@ public class Team implements Serializable{
         }
         return connection;
     }
-// Used to fetch all records  
 
     public ArrayList teamsList() 
     {
@@ -147,7 +144,6 @@ public class Team implements Serializable{
     public String edit(int id) 
     {
         Team team = null;
-        System.out.println(id);
         try {
             connection = getConnection();
             Statement stmt = getConnection().createStatement();
@@ -169,7 +165,6 @@ public class Team implements Serializable{
 
     public String update(Team t) 
     {
-        //int result = 0;  
         try 
         {
             connection = getConnection();
@@ -204,4 +199,8 @@ public class Team implements Serializable{
             System.out.println(e);
         }
     }
+    
+    public String redirection(){
+        return "index.xhtml?faces-redirect=true";
+    } 
 }
