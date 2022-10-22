@@ -10,6 +10,11 @@ I created a PostgreSQL database in order to store data about Teams and Cities in
 
 `http://localhost:8080/JTLab3`
 
+### Homework
+Similar project to Compulsory, but on top of the datatable created above, I introduced CRUD (create, read, update, delete) using separate pages (except delete).
+
+`http://localhost:8080/JTLab3-Homework`
+
 ## Lab 2 - Web Components
 I use a Payara Server for this laboratory.
 ### Compulsory
