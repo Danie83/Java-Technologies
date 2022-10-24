@@ -1,0 +1,4 @@
+Team.class
+JDBCConnection.class
+com\ddf\jtlab4\resources\JavaEE8Resource.class
+com\ddf\jtlab4\JAXRSConfiguration.class

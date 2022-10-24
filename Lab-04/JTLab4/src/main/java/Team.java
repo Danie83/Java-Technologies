@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import javax.annotation.ManagedBean;
 import javax.annotation.Resource;
+import javax.ejb.Stateless;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
@@ -84,7 +85,6 @@ public class Team implements Serializable
     {
         try 
         {
-            ds = JDBCConnection.getDBDataSource();
             teamsList = new ArrayList();
             connection = ds.getConnection();
             Statement stmt = connection.createStatement();
@@ -160,7 +160,7 @@ public class Team implements Serializable
     {
         try 
         {
-            connection = getConnection();
+            connection = ds.getConnection();
             PreparedStatement stmt = connection.prepareStatement(
                     "update teams set date=?, city=? where id=?");
             System.out.println(new java.sql.Date(t.getDate().getTime()));

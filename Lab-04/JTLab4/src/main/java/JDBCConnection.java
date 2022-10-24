@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.activation.DataSource;
+import javax.annotation.Resource;
 import org.postgresql.ds.PGSimpleDataSource;
 
 /*

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE resources PUBLIC "-//Payara.fish//DTD Payara Server 4 Resource Definitions//EN" "https://raw.githubusercontent.com/payara/Payara-Server-Documentation/master/schemas/payara-resources_1_6.dtd">
+<resources>
+    <jdbc-resource enabled="true" 
+                   pool-name="pgpool2" 
+                   jndi-name="java:jdbc/ds"/>
+    <jdbc-connection-pool name="pgpool2" 
+                          res-type="javax.sql.DataSource" 
+                          datasource-classname="org.postgresql.ds.PGSimpleDataSource">
+      <property name="URL" value="jdbc:postgresql://localhost:5432/JTLab3"/>
+      <property name="UseSSL" value="false"></property>
+      <property name="User" value="postgres"></property>
+      <property name="Password" value="postgres"></property>
+      <property name="AllowPublicKeyRetrieval" value="true"></property>
+    </jdbc-connection-pool>
+</resources>
