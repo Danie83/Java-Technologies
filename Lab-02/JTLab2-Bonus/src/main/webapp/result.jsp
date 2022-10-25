@@ -6,6 +6,11 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%
+    Cookie categoryCookie = new Cookie("category", request.getParameter("category"));
+    categoryCookie.setMaxAge(60*10); // 10 minutes
+    response.addCookie(categoryCookie);
+%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -17,6 +22,26 @@
         }
     </style>
     <body>
+        <%
+            Cookie cookie = null;
+            Cookie[] cookies = null;
+            
+            cookies = request.getCookies();
+            
+            if (cookies != null)
+            {
+                for (int i = 0; i < cookies.length; i++)
+                {
+                    cookie = cookies[i];
+                    out.println("Cookie name: " + cookie.getName());
+                    out.println("Cookie value: " + cookie.getValue());
+                }
+            }
+            else
+            {
+                out.println("No cookie");
+            }
+        %>
         <%
             String category1 = request.getParameter("category");
             if (category1 != null && !category1.isEmpty())
