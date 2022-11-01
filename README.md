@@ -27,6 +27,11 @@ This exercise was done on top of Compulsory and most changes are done in the cod
 
 `http://localhost:8080/JTLab2/controller`, complete the form and submit. The decorator is present in both form and result pages, the server.log can be accessed from the project files.
 
+### Bonus
+Created a web listener that reads a context init parameter and stores it in a class. Whenever the category is not displayed, it is replaced with a default category from the context init parameter read. At all times, the category is displayed in the response page upon completing the form. Also created a hand-made cookie that is displayed alongside the default category in the response page.
+
+`http://localhost:8080/JTLab2-Bonus/home`, complete the form and submit. The cookies and the category are displayed on top of the page.
+
 ## Lab 1 - Java Servlet Technology
 I use a Payara Server for this laboratory.
 ### Compulsory
