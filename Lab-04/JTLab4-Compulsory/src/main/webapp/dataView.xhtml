@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Team Datatable</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <h:form>  
+            <center>  
+                <h2><h:outputText value="Team Records"/></h2>  
+            </center>  
+            <p:dataTable binding="#{table}" value="#{team.teamsList()}" var="t">  
+                <p:column>  
+                    <f:facet name="header">ID</f:facet>  
+                    <h:outputText value="#{table.rowIndex + 1}"/>  
+                </p:column>  
+                <p:column>  
+                    <f:facet name="header">Founding Date</f:facet>  
+                    <h:outputText value="#{t.date}"/>  
+                </p:column>  
+                <p:column>
+                    <f:facet name="header">City</f:facet>  
+                    <h:outputText value="#{t.city}"/>  
+                </p:column>  
+                <p:column>  
+                    <f:facet name="header">Update</f:facet>  
+                    <p:commandButton action = "#{team.edit(t.id)}" value="Update">
+                    </p:commandButton>  
+                </p:column>  
+                <p:column>  
+                    <f:facet name="header">Delete</f:facet>  
+                    <p:commandButton action = "#{team.delete(t.id)}" value="Delete">
+                    </p:commandButton>  
+                </p:column>  
+            </p:dataTable>
+            <center><p:commandButton action = "dataCreate.xhtml?faces-redirect=true" value="New"></p:commandButton></center>  
+        </h:form> 
+    </h:body>
+</html>
