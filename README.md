@@ -2,6 +2,20 @@
 Reminder - Lab 1: Do not install any server in a filepath that contains space.
 Reminder - Lab 2: If the project previously worked, and then it stopped working... Simply create a new project, deploy on the same server as the previous project, close the server. Return to the original project and deploy it again! It's scary when it happens for the first time and don't know what to do :')
 Reminder - Lab 3: Do not include a .xhtml file into a .jsp file and use #{...} notation. 
+Reminder - Lab 4: If console can't read a path, simply place the target file/jar in the root folder of the asadmin console.
+
+## Lab 4 - JavaServer Faces, Facelets. JNDI and Resources.
+I use a Payara Server for this laboratory.
+
+### Compulsory
+I had problems setting up a jdbc connection pool because asadmin wouldn't recognize any path to the postgresql-\*.jar I gave. The solution was to place the .jar in the same folder as the console. I managed to create a jdbc connection pool and a datasource from the Payara Administration Console. The DataSource object was created using  resource injection.
+
+This exercise is only related to backend, this means that there is no frontend specification available.
+
+### Homework
+Created a page using <ui:composition></ui:composition> that uses page.xhtml as a template. The page.xhtml includes the header, content and footer which are weparate pages. Since the dataView.xhtml needs to be a generic page, this means that it should not be part of the page.xhtml (?), so I took the Homework exercise from Lab-03 and expanded the current Homework.
+
+`http://localhost:8080/JTLab4-Compulsory`, enter the page.xhtml view and press the only button existent in the page to access dataView.xhtml which displays a datatable with information about a series of Teams. CRUD operations are available, each action is redirected to another generic page for each oepration except the delete action which only needs to delete an entry without any confirmation.
 
 ## Lab 3 - JavaServer Faces
 I use a Payara Server for this laboratory.
