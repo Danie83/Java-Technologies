@@ -4,6 +4,13 @@ Reminder - Lab 2: If the project previously worked, and then it stopped working.
 Reminder - Lab 3: Do not include a .xhtml file into a .jsp file and use #{...} notation. 
 Reminder - Lab 4: If console can't read a path, simply place the target file/jar in the root folder of the asadmin console.
 
+## Lab 5 - Java Persistence API (JPA)
+I use Payara Serve forthis laboratory.
+
+### Compulsory
+I used the same JDBC Resource defined in Lab 4 and redesigned the Team.java into an Entity. I also Defined persistence.xml file for setting up JPA.
+`http://localhost:8080/JTLab5/test` will display a list of elements of type Team from the database.
+
 ## Lab 4 - JavaServer Faces, Facelets. JNDI and Resources.
 I use a Payara Server for this laboratory.
 
