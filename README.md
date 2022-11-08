@@ -11,6 +11,9 @@ I use Payara Serve forthis laboratory.
 I used the same JDBC Resource defined in Lab 4 and redesigned the Team.java into an Entity. I also Defined persistence.xml file for setting up JPA.
 `http://localhost:8080/JTLab5/test` will display a list of elements of type Team from the database.
 
+### Homework 
+I used EJB injection in Compulsory and defined an Entity class already. I created a few name queries and a repository is used to READ and CREATE data of type Team.
+
 ## Lab 4 - JavaServer Faces, Facelets. JNDI and Resources.
 I use a Payara Server for this laboratory.
 
