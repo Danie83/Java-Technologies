@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -19,6 +21,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="teams")
+@NamedQueries({
+    @NamedQuery(name="Teams.basicFindAll", query="SELECT t FROM Team t"),
+    @NamedQuery(name="Teams.orderedFindAll", query="SELECT t FROM Team t ORDER BY t.id")
+})
 public class Team implements Serializable {
 
     private static final long serialVersionUID = 1L;

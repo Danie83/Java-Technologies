@@ -20,7 +20,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(urlPatterns = {"/test"})
 public class TestServlet extends HttpServlet {
     
-    @EJB TeamDao teamDao;
+    @EJB 
+    TeamDao teamDao;
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -60,7 +61,7 @@ public class TestServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("teams", teamDao.getAllTeams());
+        request.setAttribute("teams", teamDao.getTeams());
         request.getRequestDispatcher("/team.jsp").forward(request, response);
     }
 
