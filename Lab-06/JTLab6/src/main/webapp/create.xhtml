@@ -20,29 +20,29 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                 </div>  
             </div>  
                 <h:outputLabel for="team1" value="First team"/>
-                    <p:inputText id="team1-id" value="#{schedule.team1}">  
+                    <p:inputText id="team1-id" value="#{scheduleController.schedule.team1}">  
                     </p:inputText>
                 <hr/> 
                 <h:outputLabel for="team2" value="Second team"/>
-                    <p:inputText id="team2-id" value="#{schedule.team2}">  
+                    <p:inputText id="team2-id" value="#{scheduleController.schedule.team2}">  
                     </p:inputText>
                 <hr/> 
                 <h:outputLabel for="week" value="Week"/>
-                    <p:inputText id="week-id" value="#{schedule.week}">  
+                    <p:inputText id="week-id" value="#{scheduleController.schedule.week}">  
                     </p:inputText>
                 <hr/>
                 <h:outputLabel for="start" value="Start"/>
-                    <p:inputText id="start-id" value="#{schedule.start}">  
+                    <p:inputText id="start-id" value="#{scheduleController.schedule.start}">  
                     </p:inputText>
                 <hr/> 
                 <h:outputLabel for="end" value="End"/>
-                    <p:inputText id="end-id" value="#{schedule.end}">  
+                    <p:inputText id="end-id" value="#{scheduleController.schedule.end}">  
                     </p:inputText>
                 <hr/> 
             <div>  
                 <div>  
                     <div>  
-                        <p:commandButton value="Save" action="#{scheduleController.addNewSchedule()}"  
+                        <p:commandButton type="submit" value="Save" action="#{scheduleController.addNewSchedule()}"  
                                          style="width: 80px;"></p:commandButton>  
                     </div>  
                 </div>  
