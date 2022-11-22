@@ -42,6 +42,10 @@ public class ScheduleController
     
     public String addNewSchedule()
     {
+        if (!scheduleEJB.checkAvailableSchedule(schedule))
+        {
+            return "schedule.xhtml";
+        }
         setSchedule(getStatefulScheduleEJB().addNew(getSchedule()));
         setScheduleList(getScheduleEJB().findSchedules());
         return "schedule.xhtml";

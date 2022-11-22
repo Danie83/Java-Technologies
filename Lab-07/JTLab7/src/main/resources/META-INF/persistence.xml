@@ -3,7 +3,7 @@
   <!-- Define Persistence Unit -->
   <persistence-unit name="com.ddf_JTLab7_war_1.0-SNAPSHOTPU" transaction-type="JTA">
     <jta-data-source>jdbc/ds</jta-data-source>
-    <class>com.ddf.User</class>
+    <class>com.ddf.Users</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.schema-generation.database.action" value="create"/>
