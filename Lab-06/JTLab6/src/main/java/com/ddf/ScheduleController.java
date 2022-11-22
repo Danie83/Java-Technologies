@@ -7,7 +7,9 @@ package com.ddf;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ejb.EJB;
-import javax.enterprise.context.RequestScoped;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Named;
 
 /**
@@ -15,11 +17,15 @@ import javax.inject.Named;
  * @author Home pc
  */
 @Named(value="scheduleController")
-@RequestScoped
+@ApplicationScoped
+@Singleton
+@Startup
 public class ScheduleController 
 {
     @EJB
     private ScheduleEJB scheduleEJB;
+    @EJB
+    private StatefulScheduleEJB statefulScheduleEJB;
     private Schedule schedule = new Schedule();
     private List<Schedule> scheduleList = new ArrayList<>();
     
@@ -36,7 +42,7 @@ public class ScheduleController
     
     public String addNewSchedule()
     {
-        setSchedule(getScheduleEJB().addNew(getSchedule()));
+        setSchedule(getStatefulScheduleEJB().addNew(getSchedule()));
         setScheduleList(getScheduleEJB().findSchedules());
         return "schedule.xhtml";
     }
@@ -74,6 +80,20 @@ public class ScheduleController
      */
     public void setScheduleList(List<Schedule> scheduleList) {
         this.scheduleList = scheduleList;
+    }
+
+    /**
+     * @return the statefulScheduleEJB
+     */
+    public StatefulScheduleEJB getStatefulScheduleEJB() {
+        return statefulScheduleEJB;
+    }
+
+    /**
+     * @param statefulScheduleEJB the statefulScheduleEJB to set
+     */
+    public void setStatefulScheduleEJB(StatefulScheduleEJB statefulScheduleEJB) {
+        this.statefulScheduleEJB = statefulScheduleEJB;
     }
     
 }

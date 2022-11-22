@@ -42,19 +42,8 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
                     <f:facet name="header">End</f:facet>  
                     <h:outputText value="#{s.end}"/>  
                 </p:column>
-                
-<!--                <p:column>  
-                    <f:facet name="header">Update</f:facet>  
-                    <p:commandButton action = "#{team.edit(t.id)}" value="Update">
-                    </p:commandButton>  
-                </p:column>  
-                <p:column>  
-                    <f:facet name="header">Delete</f:facet>  
-                    <p:commandButton action = "#{team.delete(t.id)}" value="Delete">
-                    </p:commandButton>  
-                </p:column>  -->
             </p:dataTable>
-<!--            <center><p:commandButton action = "dataCreate.xhtml?faces-redirect=true" value="New"></p:commandButton></center>  -->
+            <center><p:commandButton action = "create.xhtml?faces-redirect=true" value="New"></p:commandButton></center>  
         </h:form> 
     </h:body>
 </html>

@@ -5,6 +5,7 @@
 package com.ddf;
 
 import java.util.List;
+import java.util.Objects;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -26,9 +27,31 @@ public class ScheduleEJB
         return query.getResultList();
     }
     
-    public Schedule addNew(Schedule schedule)
+    public boolean checkAvailableSchedule(Schedule sch)
     {
-        entityManager.persist(schedule);
-        return schedule;
+        List<Schedule> schedules = findSchedules();
+        for (Schedule schedule : schedules)
+        {
+            if (!Objects.equals(schedule.getWeek(), sch.getWeek()))
+            {
+                continue;
+            }
+            
+            if (sch.getStart() >= schedule.getStart() && sch.getEnd() <= schedule.getEnd())
+            {
+                return false;
+            }
+            
+            if (sch.getStart() < schedule.getStart() && sch.getEnd() <= schedule.getEnd())
+            {
+                return false;
+            }
+            
+            if (sch.getStart() >= schedule.getStart() && sch.getStart() <= schedule.getEnd())
+            {
+                return false;
+            }
+        }
+        return true;
     }
 }
