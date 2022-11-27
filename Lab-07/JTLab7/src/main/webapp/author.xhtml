@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Author form</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <h2>Select and upload a file</h2>
+        <p>
+            <!-- Shows the error or success message -->
+            <h:outputText value="#{fileUploadBean.message}"
+                    rendered="#{!empty fileUploadBean.message}"></h:outputText>
+            <!-- notice the enctype for file upload -->
+            <h:form enctype="multipart/form-data">
+                <h:panelGrid>
+                    <!-- input for file -->
+                    <h:inputFile value="#{fileUploadBean.file1}"></h:inputFile>
+                    <!-- action which is responsible for uploading file(s) -->
+                    <h:commandButton action="#{fileUploadBean.uploadFile()}"
+                            value="Upload"></h:commandButton>
+                </h:panelGrid>
+            </h:form>
+        </p>
+    </h:body>
+</html>
