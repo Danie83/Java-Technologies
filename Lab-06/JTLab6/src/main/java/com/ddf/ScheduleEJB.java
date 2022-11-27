@@ -6,6 +6,10 @@ package com.ddf;
 
 import java.util.List;
 import java.util.Objects;
+import javax.ejb.ConcurrencyManagement;
+import javax.ejb.ConcurrencyManagementType;
+import javax.ejb.Lock;
+import javax.ejb.LockType;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -16,11 +20,13 @@ import javax.persistence.TypedQuery;
  * @author Home pc
  */
 @Stateless
+@ConcurrencyManagement(ConcurrencyManagementType.CONTAINER)
 public class ScheduleEJB 
 {
     @PersistenceContext
     private EntityManager entityManager;
     
+    @Lock(LockType.READ)
     public List<Schedule> findSchedules()
     {
         TypedQuery<Schedule> query = entityManager.createNamedQuery("findAllSchedules", Schedule.class);

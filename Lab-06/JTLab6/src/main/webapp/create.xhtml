@@ -42,8 +42,10 @@ Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit t
             <div>  
                 <div>  
                     <div>  
-                        <p:commandButton type="submit" value="Save" action="#{scheduleController.addNewSchedule()}"  
-                                         style="width: 80px;"></p:commandButton>  
+                        <p:commandButton value="Save" action="#{scheduleController.addNewSchedule()}"  
+                                         style="width: 80px;"></p:commandButton>
+                        <p:commandButton type="submit" value="Save All" action="#{scheduleController.addAllToSchedule()}"  
+                                         style="width: 80px;"></p:commandButton>
                     </div>  
                 </div>  
             </div>  

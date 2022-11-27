@@ -40,13 +40,20 @@ public class ScheduleController
         return "schedule.xhtml";
     }
     
-    public String addNewSchedule()
+    public void addNewSchedule()
     {
         if (!scheduleEJB.checkAvailableSchedule(schedule))
         {
-            return "schedule.xhtml";
+            return;
         }
         setSchedule(getStatefulScheduleEJB().addNew(getSchedule()));
+        // because it would duplicate elements
+        schedule = new Schedule();
+    }
+    
+    public String addAllToSchedule()
+    {
+        getStatefulScheduleEJB().addAll();
         setScheduleList(getScheduleEJB().findSchedules());
         return "schedule.xhtml";
     }
