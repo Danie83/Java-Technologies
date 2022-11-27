@@ -5,6 +5,9 @@ import javax.enterprise.context.SessionScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.servlet.http.HttpSession;
 
 /*
@@ -23,12 +26,17 @@ public class Login implements Serializable {
     private String user;
     private String password;
     private String type;
-
-    //validate login
+    
+    @PersistenceContext
+    private EntityManager em;
+    
     public String validateUsernamePassword() 
     {
-        LoginDAO loginDAO = new LoginDAO();
-        boolean valid = loginDAO.validate(getUser(), password);
+        TypedQuery<Users> query = em.createQuery(
+                "SELECT u FROM Users u WHERE u.username = ?1 and u.password = ?2", Users.class)
+                .setParameter(1, getUser())
+                .setParameter(2, password);
+        boolean valid = query != null;
         if (valid) 
         {
             HttpSession session = SessionUtils.getSession();
