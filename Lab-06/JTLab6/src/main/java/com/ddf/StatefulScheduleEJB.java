@@ -11,6 +11,8 @@ import javax.ejb.ConcurrencyManagementType;
 import javax.ejb.Lock;
 import javax.ejb.LockType;
 import javax.ejb.Stateful;
+import javax.interceptor.AroundInvoke;
+import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -26,6 +28,28 @@ public class StatefulScheduleEJB
     private EntityManager entityManager;
     
     private List<Schedule> schedules;
+    
+    @AroundInvoke
+    public Object log (InvocationContext ctx) throws Exception 
+    {
+        String className = ctx.getTarget().getClass().getName();
+        String methodName = ctx.getMethod().getName();
+        String target = className + "." + methodName + "()";
+        long t1 = System.currentTimeMillis();
+        try 
+        {
+            return ctx.proceed();
+        } catch(Exception e) 
+        {
+            throw e;
+        } finally 
+        {
+            long t2 = System.currentTimeMillis();
+            System.out.println(target + " took " +
+            (t2-t1) + "ms to execute");
+        }
+    }
+
     
     public Schedule addNew(Schedule schedule)
     {
