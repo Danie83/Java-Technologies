@@ -7,6 +7,8 @@ Reminder - Lab 4: If console can't read a path, simply place the target file/jar
 ## Lab6 - Enterprise Java Beans (EJB)
 I use Payara Server for this laboratory.
 
+Use the following route to test the exercise: `http://localhost:8080/JTLab6`.
+
 ### Part 1 
 Used EJB to implement the data access layer of the application. The application uses the same database from Laboratory 3 (JTLab3). I used JTA (Java Transaction API) as 
 transaction type in the persistence unit, meaning that using .getTransaction.begin() and .getTransaction.commit() wasn't required anymore. Similar to previous laboratories, I made an application with the JSF framework and used primefaces to display an ordered and clear table of contents of the Schedule Entity (Position, Team 1, Team 2, Week, Start period, End period). The exercise has a stateless session bean that only accesses the elements of type Schedule from the database and check if a new schedule can be added among the current ones (the resource is LOCKED when reading data), a stateful session bean that is tasked with storing Schedules added by a user in a List and allow the user to add them all at once (I used buttons, one button for adding a schedule and one for saving all the schedules after the user is done adding them) and the resource is LOCKED when the schedules are added. A singleton session bean is instantiated at application startup and is tasked with determining what session bean is used (Stateless or Stateful) in order to read or write data, I named it ScheduleController.
