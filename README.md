@@ -4,6 +4,12 @@ Reminder - Lab 2: If the project previously worked, and then it stopped working.
 Reminder - Lab 3: Do not include a .xhtml file into a .jsp file and use #{...} notation. 
 Reminder - Lab 4: If console can't read a path, simply place the target file/jar in the root folder of the asadmin console.
 
+## Lab7 - Contexts and Dependency Injection (CDI)
+I use Payara Server for this laboratory.
+
+### Part 1
+I created a login page where an existent user can log in using an username and a password or a new user can register. New users will have the "basic" type account which is just a type to differentiate between admin, author, reviewer types. Users can only register in a set timeframe (I used a separate class to hold values for the hours in which users can register and get Calendar values depending on the current day). I made a form where logged authors can upload a form, the form is currently not saved in the database, but the specific entity for it exists.
+
 ## Lab6 - Enterprise Java Beans (EJB)
 I use Payara Server for this laboratory.
 
