@@ -11,6 +11,17 @@ I use Payara Server for this laboratory.
 Used EJB to implement the data access layer of the application. The application uses the same database from Laboratory 3 (JTLab3). I used JTA (Java Transaction API) as 
 transaction type in the persistence unit, meaning that using .getTransaction.begin() and .getTransaction.commit() wasn't required anymore. Similar to previous laboratories, I made an application with the JSF framework and used primefaces to display an ordered and clear table of contents of the Schedule Entity (Position, Team 1, Team 2, Week, Start period, End period). The exercise has a stateless session bean that only accesses the elements of type Schedule from the database and check if a new schedule can be added among the current ones (the resource is LOCKED when reading data), a stateful session bean that is tasked with storing Schedules added by a user in a List and allow the user to add them all at once (I used buttons, one button for adding a schedule and one for saving all the schedules after the user is done adding them) and the resource is LOCKED when the schedules are added. A singleton session bean is instantiated at application startup and is tasked with determining what session bean is used (Stateless or Stateful) in order to read or write data, I named it ScheduleController.
 
+### Part 2
+When using Second-Level Cache an entity instance is shared by all sessions crated in the same session factory. If we try to access the entity when it is locked and this second-level cache is enabled, the instance is fetched from the first-level cache if it exists there or if it is not found there and it is cached in the second-level cache and then an instance is assembled and returned with the data fetched. If nothing is found, the data is taked from the database and an instance is assembled and returned.
+
+Lazy Loading means that a resource initialization is delayed until that resource is needed. For example, we can take a large application with many pages and subpages, instead of loading the entire app which is large, the customer can access a single page (that can be cached and then accessed by another user even faster) and each time the same page is accessed, the user benefits from the activity of another user.
+
+Entity Graphs has the goal to improve runtime performance when loading the entity's relatesd associations and basic fields. I remember doing something pretty similar in a Django application where I needed to get data of a related association of a model. I don't think this can be considered close to Entity Graph but it shared the same intention. I managed to serialize a few required fields of the related model and use their data in the application.
+
+I create an interceptor in the stateful session bean and observed the execution time of each of the methods from the bean (I used the Interceptor defined in the course).
+
+I created a timer that saves the Schedules added by a user every 60 seconds. The timer could be set to 10 seconds but I forgot to change it. The List of Schedules is reset after each save, so when the user tries to save the Schedules himself, no errors would occur (I used a similar implementation to the one in the course).
+
 ## Lab 5 - Java Persistence API (JPA)
 I use Payara Server for this laboratory.
 
