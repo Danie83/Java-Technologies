@@ -49,7 +49,6 @@ public class StatefulScheduleEJB
             (t2-t1) + "ms to execute");
         }
     }
-
     
     public Schedule addNew(Schedule schedule)
     {

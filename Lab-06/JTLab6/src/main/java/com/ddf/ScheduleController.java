@@ -49,6 +49,9 @@ public class ScheduleController
         setSchedule(getStatefulScheduleEJB().addNew(getSchedule()));
         // because it would duplicate elements
         schedule = new Schedule();
+        // if user doesn't add the elements by himself after 1 minute, use a timer
+        // in order to save them
+        getScheduleEJB().createTimer(60000);
     }
     
     public String addAllToSchedule()
