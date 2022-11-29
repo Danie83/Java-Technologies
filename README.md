@@ -8,7 +8,7 @@ Reminder - Lab 4: If console can't read a path, simply place the target file/jar
 I use Payara Server for this laboratory.
 
 ### Part 1
-I created a login page where an existent user can log in using an username and a password or a new user can register. New users will have the "basic" type account which is just a type to differentiate between admin, author, reviewer types. Users can only register in a set timeframe (I used a separate class to hold values for the hours in which users can register and get Calendar values depending on the current day). I made a form where logged authors can upload a form, the form is currently not saved in the database, but the specific entity for it exists.
+I created a login page where an existent user can log in using an username and a password or a new user can register. New users will have the "basic" type account which is just a type to differentiate between admin, author, reviewer types. Users can only register in a set timeframe (I used a separate class to hold values for the hours in which users can register and get Calendar values depending on the current day). I made a form where logged authors can upload a file, the form is currently not saved in the database, but the specific entity for it exists. I created a page for admins where files uploaded can be brosed in a table, I made use of primefaces to create a good looking table. I considered the uniquely generated registration number to be the primary key that is auto-generated when introducing a new database entry.
 
 ## Lab6 - Enterprise Java Beans (EJB)
 I use Payara Server for this laboratory.
