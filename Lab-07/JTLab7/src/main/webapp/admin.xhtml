@@ -4,12 +4,37 @@ Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to c
 Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/XHtml.xhtml to edit this template
 -->
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>Admin page</title>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Admin view</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
+    </h:head>
+    <h:body>
+        <h:form>  
+            <center>  
+                <h2><h:outputText value="Uploaded documents"/></h2>  
+            </center>  
+            <p:dataTable binding="#{table}" value="#{authorViewBean.getDocuments()}" var="d">  
+                <p:column>  
+                    <f:facet name="header">ID</f:facet>  
+                    <h:outputText value="#{table.rowIndex + 1}"/>  
+                </p:column>  
+                <p:column>  
+                    <f:facet name="header">Name</f:facet>  
+                    <h:outputText value="#{d.name}"/>  
+                </p:column>  
+                <p:column>
+                    <f:facet name="header">Author</f:facet>  
+                    <h:outputText value="#{d.author}"/>  
+                </p:column>
+                <p:column>
+                    <f:facet name="header">Document</f:facet>  
+                    <h:outputText value="#{d.file}"/>  
+                </p:column>
+            </p:dataTable>
+        </h:form> 
+    </h:body>
 </html>
