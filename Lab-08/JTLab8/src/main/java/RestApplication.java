@@ -13,14 +13,16 @@ import javax.ws.rs.core.Application;
  */
 @ApplicationPath("rest")
 public class RestApplication extends Application{
-    private void addRestResourceClasses(Set<Class<?>> resources) {
-        resources.add(TeamResource.class);
-    }
     
     public Set<Class<?>> getClasses() {
         Set<Class<?>> resources = new java.util.HashSet<>();
         addRestResourceClasses(resources);
         return resources;
+    }
+
+    private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(TeamResource.class);
+        resources.add(com.ddf.jtlab8.resources.JavaEE8Resource.class);
     }
 
 }
